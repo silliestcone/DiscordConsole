@@ -65,7 +65,7 @@ func commandsSay(session *discordgo.Session, source commandSource, cmd string, a
 
 			msg, err := session.ChannelMessageSendComplex(loc.channel.ID, &discordgo.MessageSend{
 				Content: buffer,
-				Tts:     tts,
+				TTS:     tts,
 			})
 			if err != nil {
 				stdutil.PrintErr(tl("failed.msg.send"), err)
