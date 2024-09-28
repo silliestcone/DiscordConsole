@@ -95,7 +95,7 @@ func commandsUserMod(session *discordgo.Session, cmd string, args []string, narg
 			return
 		}
 
-		_, err = session.UserUpdate("", "", user.Username, str, "")
+		_, err = session.UserUpdate(user.Username, str)
 		if err != nil {
 			stdutil.PrintErr(tl("failed.avatar"), err)
 			return
@@ -121,7 +121,7 @@ func commandsUserMod(session *discordgo.Session, cmd string, args []string, narg
 			return
 		}
 
-		user, err = session.UserUpdate("", "", strings.Join(args, " "), user.Avatar, "")
+		user, err = session.UserUpdate(strings.Join(args, " "), user.Avatar)
 		if err != nil {
 			stdutil.PrintErr(tl("failed.user.edit"), err)
 			return
