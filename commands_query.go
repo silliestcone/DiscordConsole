@@ -269,8 +269,10 @@ func invite2array(invite *discordgo.Invite) []*keyval {
 		keyval.Key = "Channel_" + keyval.Key
 		values = append(values, keyval)
 	}
+	createdAtformattedTime := invite.CreatedAt.Format("2006-01-02 15:04:05")
+
 	values = append(values,
-		&keyval{"Created_at", string(invite.CreatedAt)},
+		&keyval{"Created_at", createdAtformattedTime},
 		&keyval{"Max_age", (time.Duration(invite.MaxAge) * time.Second).String()},
 		&keyval{"Max_uses", strconv.Itoa(invite.MaxUses)},
 		&keyval{"Uses", strconv.Itoa(invite.Uses)},
