@@ -859,7 +859,7 @@ func commandRaw(session *discordgo.Session, source commandSource, cmd string, ar
 				return
 			}
 
-			_, err := session.GuildEdit(loc.guild.ID, discordgo.GuildParams{
+			_, err := session.GuildEdit(loc.guild.ID, &discordgo.GuildParams{
 				Region: args[1],
 			})
 			if err != nil {
@@ -934,7 +934,7 @@ func commandRaw(session *discordgo.Session, source commandSource, cmd string, ar
 		}
 
 		if state == true {
-			_, oerr := session.GuildEdit(loc.guild.ID, discordgo.GuildParams{OwnerID: id})
+			_, oerr := session.GuildEdit(loc.guild.ID, &discordgo.GuildParams{OwnerID: id})
 			if oerr != nil {
 				stdutil.PrintErr(tl("failed.transfer"), oerr)
 				return
@@ -1083,7 +1083,7 @@ func commandRaw(session *discordgo.Session, source commandSource, cmd string, ar
 			stdutil.PrintErr(tl("invalid.guild"), nil)
 			return
 		}
-		err := session.GuildMemberMove(loc.guild.ID, args[0], args[1])
+		err := session.GuildMemberMove(loc.guild.ID, args[0], &args[1])
 		if err != nil {
 			stdutil.PrintErr(tl("failed.move"), err)
 			return
