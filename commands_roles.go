@@ -88,7 +88,7 @@ func commandsRoles(session *discordgo.Session, cmd string, args []string, nargs 
 				return
 			}
 
-			role, err := session.GuildRoleCreate(loc.guild.ID)
+			role, err := session.GuildRoleCreate(loc.guild.ID, &discordgo.RoleParams{})
 			if err != nil {
 				stdutil.PrintErr(tl("failed.role.create"), err)
 				return
@@ -166,7 +166,7 @@ func commandsRoles(session *discordgo.Session, cmd string, args []string, nargs 
 				return
 			}
 
-			role, err = session.GuildRoleEdit(loc.guild.ID, args[1], name, int(color), hoist, perms, mention)
+			role, err = session.GuildRoleEdit(loc.guild.ID, args[1], &discordgo.RoleParams{Name: name, Color: &color, Hoist: &hoist, Permissions: &perms, Mentionable: &mention})
 			if err != nil {
 				stdutil.PrintErr(tl("failed.role.edit"), err)
 				return
