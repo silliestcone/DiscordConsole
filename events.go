@@ -43,9 +43,6 @@ func ready(session *discordgo.Session, e *discordgo.Ready) {
 	for i, guild := range e.Guilds {
 		guilds[i] = toUserGuild(guild)
 	}
-	if userType == typeUser {
-		guilds = sortGuilds(guilds, e.Settings)
-	}
 
 	mutexCacheGuilds.Lock()
 	cacheGuilds = guilds

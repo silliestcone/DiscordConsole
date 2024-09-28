@@ -43,19 +43,10 @@ func commandsNavigate(session *discordgo.Session, cmd string, args []string, nar
 			guilds = cache
 		} else {
 			var err error
-			guilds, err = session.UserGuilds(100, "", "")
+			guilds, err = session.UserGuilds(100, "", "", false)
 			if err != nil {
 				stdutil.PrintErr(tl("failed.guild"), err)
 				return
-			}
-
-			if userType == typeUser {
-				settings, err := session.UserSettings()
-				if err != nil {
-					stdutil.PrintErr(tl("failed.settings"), err)
-				} else {
-					guilds = sortGuilds(guilds, settings)
-				}
 			}
 
 			mutexCacheGuilds.Lock()
@@ -313,32 +304,4 @@ func channels(session *discordgo.Session, kind discordgo.ChannelType, w io.Write
 	}
 
 	writeln(w, table.String())
-}
-
-func sortGuilds(guilds []*discordgo.UserGuild, settings *discordgo.Settings) []*discordgo.UserGuild {
-	// Endpoints aren't always synced when deleted, can't pre-allocate
-	guilds2 := make([]*discordgo.UserGuild, 0)
-	for _, g := range settings.GuildPositions {
-		for _, g2 := range guilds {
-			if g == g2.ID {
-				guilds2 = append(guilds2, g2)
-			}
-		}
-	}
-
-	// Remove intercepting
-	guilds3 := make([]*discordgo.UserGuild, 0)
-	for _, g := range guilds {
-		contains := false
-		for _, g2 := range guilds2 {
-			if g.ID == g2.ID {
-				contains = true
-			}
-		}
-
-		if !contains {
-			guilds3 = append(guilds3, g)
-		}
-	}
-	return append(guilds3, guilds2...)
 }
