@@ -706,11 +706,9 @@ func commandRaw(session *discordgo.Session, source commandSource, cmd string, ar
 			stdutil.PrintErr(tl("invalid.onlyfor.users"), nil)
 			return
 		}
-		err := session.RelationshipUserBlock(args[0])
-		if err != nil {
-			stdutil.PrintErr(tl("failed.block"), err)
-			return
-		}
+
+		stdutil.PrintErr(tl("failed.block"), nil)
+		return
 	case "friend":
 		if userType != typeUser {
 			stdutil.PrintErr(tl("invalid.onlyfor.users"), nil)
@@ -722,51 +720,30 @@ func commandRaw(session *discordgo.Session, source commandSource, cmd string, ar
 		}
 		switch strings.ToLower(args[0]) {
 		case "list":
-			relations, err := session.RelationshipsGet()
-			if err != nil {
-				stdutil.PrintErr(tl("failed.friend.list"), err)
-				return
-			}
-
-			table := gtable.NewStringTable()
-			table.AddStrings("ID", "Type", "Name")
-
-			for _, relation := range relations {
-				table.AddRow()
-				table.AddStrings(relation.ID, typeRelationships[relation.Type], relation.User.Username)
-			}
-
-			writeln(w, table.String())
+			stdutil.PrintErr(tl("failed.friend.list"), nil)
+			return
 		case "add":
 			if nargs < 2 {
 				stdutil.PrintErr("friend add <user id>", nil)
 				return
 			}
-			err := session.RelationshipFriendRequestSend(args[1])
-			if err != nil {
-				stdutil.PrintErr(tl("failed.friend.add"), err)
-				return
-			}
+
+			stdutil.PrintErr(tl("failed.friend.add"), nil)
+			return
 		case "accept":
 			if nargs < 2 {
 				stdutil.PrintErr("friend accept <user id>", nil)
 				return
 			}
-			err := session.RelationshipFriendRequestAccept(args[1])
-			if err != nil {
-				stdutil.PrintErr(tl("failed.friend.add"), err)
-				return
-			}
+			stdutil.PrintErr(tl("failed.friend.add"), nil)
+			return
 		case "remove":
 			if nargs < 2 {
 				stdutil.PrintErr("friend remove <user id>", nil)
 				return
 			}
-			err := session.RelationshipDelete(args[1])
-			if err != nil {
-				stdutil.PrintErr(tl("failed.friend.remove"), err)
-				return
-			}
+			stdutil.PrintErr(tl("failed.friend.remove"), nil)
+			return
 		default:
 			stdutil.PrintErr("friend <add/accept/remove/list> <name>", nil)
 		}
@@ -1094,12 +1071,8 @@ func commandRaw(session *discordgo.Session, source commandSource, cmd string, ar
 			stdutil.PrintErr("note <user id> <note>", nil)
 			return
 		}
-		err := session.UserNoteSet(args[0], strings.Join(args[1:], " "))
-		if err != nil {
-			stdutil.PrintErr(tl("failed.note"), err)
-			return
-		}
-		fmt.Println(tl("information.note"))
+		stdutil.PrintErr(tl("failed.note"), nil)
+		return
 	case "latency":
 		fmt.Println(session.HeartbeatLatency())
 	default:
