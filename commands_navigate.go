@@ -106,11 +106,7 @@ func commandsNavigate(session *discordgo.Session, cmd string, args []string, nar
 	case "vchannels":
 		channels(session, discordgo.ChannelTypeGuildVoice, w)
 	case "pchannels":
-		channels, err := session.UserChannels()
-		if err != nil {
-			stdutil.PrintErr(tl("failed.channel"), err)
-			return
-		}
+		channels := session.State.Ready.PrivateChannels
 
 		table := gtable.NewStringTable()
 		table.AddStrings("ID", "Type", "Recipient(s)")
