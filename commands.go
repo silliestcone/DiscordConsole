@@ -536,7 +536,7 @@ func commandRaw(session *discordgo.Session, source commandSource, cmd string, ar
 			}
 		}
 
-		bans, err := session.GuildBans(loc.guild.ID)
+		bans, err := session.GuildBans(loc.guild.ID, 1000, "", "")
 		if err != nil {
 			stdutil.PrintErr(tl("failed.ban.list"), err)
 			return
