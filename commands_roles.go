@@ -127,7 +127,7 @@ func commandsRoles(session *discordgo.Session, cmd string, args []string, nargs 
 			}
 
 			name := role.Name
-			color := int64(role.Color)
+			color := int(role.Color)
 			hoist := role.Hoist
 			perms := role.Permissions
 			mention := role.Mentionable
@@ -137,11 +137,12 @@ func commandsRoles(session *discordgo.Session, cmd string, args []string, nargs 
 				name = value
 			case "color":
 				value = strings.TrimPrefix(value, "#")
-				color, err = strconv.ParseInt(value, 16, 0)
+				color64, err := strconv.ParseInt(value, 16, 0)
 				if err != nil {
 					stdutil.PrintErr(tl("invalid.number"), nil)
 					return
 				}
+				color = int(color64)
 			case "separate":
 				hoist, err = parseBool(value)
 				if err != nil {
@@ -149,7 +150,7 @@ func commandsRoles(session *discordgo.Session, cmd string, args []string, nargs 
 					return
 				}
 			case "perms":
-				perms, err = strconv.Atoi(value)
+				perms, err = strconv.ParseInt(value, 10, 64)
 				if err != nil {
 					stdutil.PrintErr(tl("invalid.number"), nil)
 					return
