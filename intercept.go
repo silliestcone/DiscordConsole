@@ -157,11 +157,7 @@ func messageCommand(session *discordgo.Session, e *discordgo.Message, guild *dis
 	if strings.EqualFold(cmd, "ping") {
 		first := time.Now().UTC()
 
-		timestamp, err := e.Timestamp.Parse()
-		if err != nil {
-			stdutil.PrintErr(tl("failed.timestamp"), err)
-			return
-		}
+		timestamp := e.Timestamp
 
 		in := first.Sub(timestamp)
 

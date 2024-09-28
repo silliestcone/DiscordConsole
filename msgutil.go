@@ -27,14 +27,11 @@ import (
 var errMsgNotFound = errors.New("message not found")
 
 func timestamp(e *discordgo.Message) (string, error) {
-	t, err := e.Timestamp.Parse()
-	if err != nil {
-		return "", err
-	}
+	t := e.Timestamp
 
 	s := t.Format(time.ANSIC)
 
-	if e.EditedTimestamp != "" {
+	if e.EditedTimestamp != nil {
 		s += "*"
 	}
 
