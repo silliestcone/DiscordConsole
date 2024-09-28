@@ -1067,7 +1067,7 @@ func commandRaw(session *discordgo.Session, source commandSource, cmd string, ar
 			}
 			fmt.Println(tl("information.channel") + args[1] + tl("information.deleted.successfully"))
 		case "guild":
-			_, err := session.GuildDelete(args[1])
+			err := session.GuildDelete(args[1])
 			if err != nil {
 				stdutil.PrintErr(tl("failed.guild.delete"), err)
 				return
