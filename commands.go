@@ -841,11 +841,11 @@ func commandRaw(session *discordgo.Session, source commandSource, cmd string, ar
 			}
 
 			table := gtable.NewStringTable()
-			table.AddStrings("ID", "Name", "Port")
+			table.AddStrings("ID", "Name")
 
 			for _, region := range regions {
 				table.AddRow()
-				table.AddStrings(region.ID, region.Name, strconv.Itoa(region.Port))
+				table.AddStrings(region.ID, region.Name)
 			}
 
 			writeln(w, table.String())
