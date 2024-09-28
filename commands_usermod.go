@@ -193,7 +193,9 @@ func commandsUserMod(session *discordgo.Session, cmd string, args []string, narg
 			return
 		}
 
-		_, err := session.UserUpdateStatus(status)
+		err := session.UpdateStatusComplex(discordgo.UpdateStatusData{
+			Status: string(status),
+		})
 		if err != nil {
 			stdutil.PrintErr(tl("failed.status"), err)
 			return
