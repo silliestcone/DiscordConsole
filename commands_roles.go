@@ -56,7 +56,7 @@ func commandsRoles(session *discordgo.Session, cmd string, args []string, nargs 
 
 			for _, role := range roles {
 				table.AddRow()
-				table.AddStrings(role.ID, role.Name, strconv.Itoa(role.Permissions), strconv.Itoa(role.Color))
+				table.AddStrings(role.ID, role.Name, strconv.FormatInt(role.Permissions, 10), strconv.Itoa(role.Color))
 			}
 
 			writeln(w, table.String())
