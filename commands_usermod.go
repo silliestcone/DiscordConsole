@@ -128,7 +128,7 @@ func commandsUserMod(session *discordgo.Session, cmd string, args []string, narg
 		}
 		writeln(w, tl("status.name"))
 	case "playing":
-		err := session.UpdateStatus(0, strings.Join(args, " "))
+		err := session.UpdateGameStatus(0, strings.Join(args, " "))
 		if err != nil {
 			stdutil.PrintErr(tl("failed.status"), err)
 		}
