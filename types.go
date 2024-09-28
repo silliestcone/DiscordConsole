@@ -82,10 +82,10 @@ var typeStatuses = map[string]discordgo.Status{
 	"dnd":       discordgo.StatusDoNotDisturb,
 	"invisible": discordgo.StatusInvisible,
 }
-var typeGames = map[string]discordgo.GameType{
-	"streaming": discordgo.GameTypeStreaming,
-	"listening": discordgo.GameTypeListening,
-	"watching":  discordgo.GameTypeWatching,
+var typeGames = map[string]discordgo.ActivityType{
+	"streaming": discordgo.ActivityTypeStreaming,
+	"listening": discordgo.ActivityTypeListening,
+	"watching":  discordgo.ActivityTypeWatching,
 }
 var typeChannel = map[discordgo.ChannelType]string{
 	discordgo.ChannelTypeDM:            "DM",
