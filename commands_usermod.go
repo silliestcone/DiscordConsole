@@ -217,14 +217,14 @@ func commandsUserMod(session *discordgo.Session, cmd string, args []string, narg
 		if nargs > 3 {
 			lt = args[3]
 		}
-		game := &discordgo.Game{
+		game := &discordgo.Activity{
 			Name:       args[1],
 			Details:    details,
 			Type:       status,
-			TimeStamps: discordgo.TimeStamps{StartTimestamp: time.Now().Unix()},
+			Timestamps: discordgo.TimeStamps{StartTimestamp: time.Now().Unix()},
 			Assets:     discordgo.Assets{LargeText: lt},
 		}
-		statusData := discordgo.UpdateStatusData{new(int), game, false, ""}
+		statusData := discordgo.UpdateStatusData{IdleSince: new(int), Activities: []*discordgo.Activity{game}, AFK: false, Status: ""}
 		err := session.UpdateStatusComplex(statusData)
 		if err != nil {
 			stdutil.PrintErr(tl("failed.status"), err)
