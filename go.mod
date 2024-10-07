@@ -1,4 +1,4 @@
-module github.com/discordconsole-team/DiscordConsole
+module github.com/silliestcone/DiscordConsole
 
 go 1.23.1
 
