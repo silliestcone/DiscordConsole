@@ -7,6 +7,7 @@ require (
 	github.com/atotto/clipboard v0.1.4
 	github.com/bwmarrin/discordgo v0.28.1
 	github.com/chzyer/readline v1.5.1
+	github.com/discordconsole-team/DiscordConsole v2.3.4+incompatible
 	github.com/fatih/color v1.17.0
 	github.com/jD91mZM2/gtable v0.0.0-20190812155809-cbdddc3fac45
 	github.com/jD91mZM2/stdutil v0.0.0-20170901124457-d11b5b05d8c8
